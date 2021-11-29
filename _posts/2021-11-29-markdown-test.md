@@ -6,6 +6,8 @@ category: 工具
 tags: [markdown]
 ---
 
+这篇文章用于测试 Markdown 支持情况
+
 # 基础语法
 
 ## 粗体和斜体
@@ -128,7 +130,7 @@ int main()
 ```
 
 指定语言的代码块：
-```C
+```c
 #include <stdio.h>
 
 int main()

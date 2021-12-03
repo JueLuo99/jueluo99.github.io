@@ -217,6 +217,7 @@ social:
   #LinkLabel: Link
   GitHub: https://github.com/JueLuo99
   Weibo: https://weibo.com/u/3363135844
+  Steam: https://steamcommunity.com/id/jueluo/
 
 
 # Social Links Icons
@@ -231,6 +232,7 @@ social_icons:
   GitHub: github
   Twitter: twitter
   Weibo: weibo
+  Steam: steam
 
 
 # Sidebar Avatar

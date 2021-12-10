@@ -15,6 +15,15 @@ tags: [markdown, vscode]
 
 <!--more-->
 
+## 自己对默认设置做出的一点调整
+
+| 设置项                                        | 设置值  | 说明                                  |
+| :-------------------------------------------- | :------ | :------------------------------------ |
+| `markdown.extension.orderedList.autoRenumber` | `false` | 关闭自动编号有序列表项                |
+| `markdown.extension.orderedList.marker`       | `one`   | 总是使用 `1.` 来标记有序列表项        |
+| 快捷键中的 `markdown.extension.onTabKey`      | 移除    | 因为会覆盖掉 `Copilot` 等插件的快捷键 |
+
+如此，即可愉快地使用以下功能啦
 
 ## 快捷键
 
@@ -54,4 +63,3 @@ tags: [markdown, vscode]
 
 - 粘贴链接到选中的文本上，以将其直接转换为链接格式
 - 图片地址、文件地址、数学公式的自动补全
-

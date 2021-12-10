@@ -19,8 +19,6 @@ tags: [python, virtualenv]
 | `conda`      | ❌          | ✔️               |
 | `pyvenv`     | 已弃用     | -               |
 
- <!--         | `pipenv`   | ❌               |  | --> 
-
 还有其他同样优秀、功能各异的虚拟环境工具，本文未做详细介绍：
 - [pyenv/pyenv: Simple Python version management](https://github.com/pyenv/pyenv)
 - [pyenv/pyenv-virtualenv: a pyenv plugin to manage virtualenv (a.k.a. python-virtualenv)](https://github.com/pyenv/pyenv-virtualenv)

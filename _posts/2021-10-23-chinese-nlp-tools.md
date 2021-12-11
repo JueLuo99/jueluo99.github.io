@@ -2,8 +2,8 @@
 layout: post
 title: 常用的中文 NLP 库整理
 date: 2021-10-23 20:34
-category: 人工智能
-tags: [nlp, chinese, deep learning]
+category: AI
+tags: [nlp, chinese, deep learning, AI]
 ---
 
 整理一些自己日常学习中常用到的中文 NLP 库

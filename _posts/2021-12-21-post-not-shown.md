@@ -2,7 +2,7 @@
 layout: post
 title: 关于 Jekyll 编译通过但文章未显示的思考
 date: 2021-12-21 17:56
-category: 
+category: Jekyll
 tags: [jekyll]
 ---
 

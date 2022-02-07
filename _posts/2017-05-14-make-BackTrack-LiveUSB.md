@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 将 BackTrack 制作为 LiveUSB
-date: 2017-03-11 22:36
+date: 2017-05-14 21:30
 category: 网络安全
 tags: [linux, backtrack, liveusb]
 ---

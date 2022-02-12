@@ -13,7 +13,8 @@ tags: [markdown, vscode]
 项目地址：https://github.com/yzhang-gh/vscode-markdown
 商店地址：https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one
 
-<!--more-->
+<!-- more -->
+
 
 ## 自己对默认设置做出的一点调整
 

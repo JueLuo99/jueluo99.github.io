@@ -9,7 +9,7 @@ tags: [huawei, cheatsheet, router, switch, ensp]
 ## 关于 eNSP 的一些吐槽
 
 1. VirtualBox 版本必须为 eNSP 安装时提示的对应版本，否则在主程序启动时会有个错误提示，且设备不能正常启动
-1. `ping` 命令展示的耗时远比思科模拟器和现实环境要长，原因未知
+1. `ping` 命令展示的耗时远比思科模拟器或现实环境要长，原因未知
 
 ## 静态路由及默认路由
 
@@ -44,7 +44,7 @@ tags: [huawei, cheatsheet, router, switch, ensp]
 [R2]ip route-static 10.0.13.0 255.255.255.0 Serial 0/0/1 preference 80 
 ```
 
-## RIP 的配置
+## RIPv1 和 v2 配置
 
 ### 拓扑图
 
@@ -93,6 +93,58 @@ R3 配置 Loopback 接口
 [R2]rip 1 
 [R2-rip-1]import-route static
 ```
+
+## RIPv2 路由汇总和认证
+
+### 拓扑图
+
+![](/assets/2022/003.png)
+
+基础配置与 IP 配置过程略
+
+### 配置 RIPv2
+
+在 R1 R2 R3 上配置路由协议 RIPv2
+
+```
+[R3]rip 1 
+[R3-rip-1]network 172.16.0.0 
+[R3-rip-1]network 10.0.0.0 
+[R3-rip-1]version 2 
+```
+
+### 在 R2 上配置 RIP 手动路由汇总
+
+```
+[R2]interface serial 0/0/1 
+[R2-Serial0/0/1]rip summary-address 172.16.0.0 255.255.0.0 
+```
+
+对比执行前后 R1 的路由表变化
+
+### 配置路由认证
+
+#### 明文认证
+
+设置认证密码为 `password`
+
+```
+[R1]interface serial 0/0/1 
+[R1-Serial0/0/1]rip authentication-mode simple password
+```
+
+R2 操作同上
+
+#### MD5 认证
+
+设置认证密码为 `password`
+
+```
+[R2]interface serial 0/0/2 
+[R2-Serial0/0/2]rip authentication-mode md5 usual password
+```
+
+R3 操作同上
 
 ## 速查表
 

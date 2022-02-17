@@ -358,6 +358,134 @@ R3 同样配置完认证后，可重新与 R1 建立邻居
 
 验证 R1 和 R2 的路由表
 
+# 以太网及生成树协议
+
+## 以太网接口及链路配置
+
+### 拓扑图
+
+![](/assets/2022/007.png)
+
+### 基本配置
+
+```
+<Huawei>system-view
+[Huawei]sysname S1
+```
+
+取消自动协商，手动设定速率和全双工模式
+
+```
+[S1]interface GigabitEthernet 0/0/9 
+[S1-GigabitEthernet0/0/9]undo negotiation auto 
+[S1-GigabitEthernet0/0/9]speed 100 
+[S1-GigabitEthernet0/0/9]duplex full
+```
+
+接口 0/0/10 和 S2 配置同理
+
+### 配置手动链路聚合
+
+在 S1 上创建 Eth-trunk-1，并将接口 0/0/9 加入到 Eth-trunk-1 中
+
+```
+[S1]interface Eth-Trunk 1 
+[S1-Eth-Trunk1]quit 
+[S1]interface GigabitEthernet 0/0/9 
+[S1-GigabitEthernet0/0/9]eth-trunk 1 
+```
+
+接口 0/0/10 和 S2 配置同理
+
+查看配置结果
+
+```
+[S1]display eth-trunk 1
+```
+
+## STP 配置
+
+### 拓扑图
+
+![](/assets/2022/008.png)
+
+### STP 配置
+
+在 S1 上
+
+```
+<Huawei>system-view 
+[Huawei]sysname S1 
+[S1]stp mode stp 
+[S1]stp root secondary 
+```
+
+在 S2 上
+
+```
+[S2]stp mode stp 
+[S2]stp root primary
+```
+
+在 S3 上
+
+```
+[S3]stp mode stp
+```
+
+S4 同上
+
+使用 `display stp brief` 查看各接口简要 STP 状态
+
+使用形如 `display stp interface GigabitEthernet 0/0/9` 查看特定接口详细 STP 状态
+
+### 控制根桥选举
+
+定义优先级
+
+```
+[S1]undo stp root 
+[S1]stp priority 4096 
+[S2]undo stp root 
+[S2]stp priority 8192 
+```
+
+再使用 `display stp` 命令可以看出 S1 成了新的根桥
+
+此时如果关闭 S1 的 G0/0/9、G0/0/10、G0/0/13、G0/0/14 四个接口，隔离 S1，那么 S2 就会由备份根桥变成新的根桥
+
+开启 S1 之前关闭的接口，S1 会被重新选举成为根桥
+
+### 根端口选举控制
+
+端口优先级默认值为 128，可以通过以下命令设置
+
+```
+[S1]interface GigabitEthernet 0/0/9 
+[S1-GigabitEthernet0/0/9]stp port priority 32
+```
+
+在 S2 上使用 `display stp brief` 可以看到 S2 的 `G0/0/10` 被选举成了新的根端口，`G0/0/9` 成为了替代端口
+
+此时关闭 S2 上的根端口 G0/0/10，G0/0/9 就会被选举成为新的根端口
+
+
+### 边缘端口配置
+
+将连接用户终端设备的端口配置成边缘端口，可以使该端口无需经历 STP 计算过程快速进入转发状态
+
+```
+[S3]interface GigabitEthernet 0/0/3
+[S3-GigabitEthernet0/0/3]stp edged-port enable
+```
+
+配置完成后，计算机网线接入到 S3 的接口 G0/0/3 上，可以看到 G0/0/3 端口状态变成了 Forwarding 状态，连接到其他没有配置到边缘端口的端口后，则要等待约 30 秒才能到达 Forwarding 状态
+
+## VLAN 配置
+
+### 
+
+
 # 附录
 
 ## 速查表
@@ -375,3 +503,11 @@ R3 同样配置完认证后，可重新与 R1 建立邻居
 | BGP                | 255    |
 
 注：优先级数字越小，优先级越高
+
+## 名词解释
+
+### STP
+
+- IEEE 802.1D 中定义的 STP（Spanning Tree Protocol）
+- IEEE 802.1W 中定义的快速生成树协议 RSTP（Rapid Spanning Tree Protocol）
+- IEEE 802.1S中定义的多生成树协议MSTP（Multiple Spanning Tree Protocol）

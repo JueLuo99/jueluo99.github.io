@@ -483,7 +483,127 @@ S4 同上
 
 ## VLAN 配置
 
-### 
+### 拓扑图
+
+![](/assets/2022/009.png)
+
+### Eth-trunk 链路聚合
+
+在 S1 和 S2 之间有两条链路，如果开启 STP 则会有一条链路被禁用，造成带宽浪费；如果不使用 STP 则会造成环路；这种情况下，使用链路聚合，可以很好解决这个问题
+
+S1 和 S2 采用两种方式配置，结果相同
+
+```
+[S1]interface gigabitethernet0/0/9 
+[S1-GigabitEthernet0/0/9]eth-trunk 1 
+[S1-GigabitEthernet0/0/9]quit
+[S1]interface gigabitethernet0/0/10 
+[S1-GigabitEthernet0/0/10]eth-trunk 1 
+```
+
+```
+[S2]interface eth-trunk 1 
+[S2-Eth-Trunk1]trunkport GigabitEthernet 0/0/9 
+[S2-Eth-Trunk1]trunkport GigabitEthernet 0/0/10
+```
+
+接口默认的链路类型为 Hybird 类型，可以修改链路类型为 Trunk 类型
+
+默认情况下，接口的 Trunk 功能禁止所有的 VLAN 数据传输过去
+
+```
+[S1]interface Eth-Trunk 1 
+[S1-Eth-Trunk1]port link-type trunk 
+[S1-Eth-Trunk1]port trunk allow-pass vlan all 
+```
+
+S2 配置同上
+
+### 配置 VLAN
+
+下面展示配置号码连续的多个 VLAN 的两种方式和定义 VLAN 与接口的对应关系的两种方式
+
+```
+[S1]interface GigabitEthernet0/0/13 
+[S1-GigabitEthernet0/0/13]port link-type access 
+[S1-GigabitEthernet0/0/13]quit
+[S1]interface GigabitEthernet0/0/1 
+[S1-GigabitEthernet0/0/1]port link-type access 
+[S1-GigabitEthernet0/0/1]quit
+[S1]vlan 3 
+[S1-vlan3]port GigabitEthernet0/0/13 
+[S1-vlan3]quit
+[S1]vlan 4 
+[S1-vlan4]port GigabitEthernet0/0/1 
+[S1-vlan4]quit
+[S1]vlan 5
+```
+
+```
+[S2]vlan batch 3 to 5 
+[S2]interface GigabitEthernet 0/0/3 
+[S2-GigabitEthernet0/0/3]port link-type access 
+[S2-GigabitEthernet0/0/3]port default vlan 4 
+[S2-GigabitEthernet0/0/3]quit
+[S2]interface GigabitEthernet 0/0/24 
+[S2-GigabitEthernet0/0/24]port link-type access 
+[S2-GigabitEthernet0/0/24]port default vlan 5 
+```
+
+### 规划地址
+
+R1、R3、S3、S4 模拟为客户端，测试 VLAN 配置效果
+
+交换机物理接口无法配置地址，在 VLANIF1 接口配置 IP 地址
+
+```
+[S3]interface vlanif 1 
+[S3-vlanif1]ip address 10.0.3.3 24
+```
+
+S4 配置过程类似，R1、R3 配置过程略
+
+### 掌握 Hybird 接口的配置
+
+Hybird 接口与 Trunk 接口类似，但是增加了一些功能，可以实现在不同 VLAN 的用户通讯
+
+修改 S3 与 R3 地址
+
+```
+[S3]interface Vlanif 1 
+[S3-Vlanif1]ip address 10.0.6.3 24
+
+[R3]interface GigabitEthernet 0/0/2 
+[R3-GigabitEthernet0/0/2]ip address 10.0.6.4 24 
+```
+
+定义 S1 的 G0/0/13 接口为 Hybird 接口，属于 VLAN3。对 VLAN3 和 VLAN4 定义为 Untagged。注意修改链路类型之前，需要删除接口的额外配置。
+
+```
+[S1]interface GigabitEthernet0/0/13 
+[S1-GigabitEthernet0/0/13]undo port default vlan 
+[S1-GigabitEthernet0/0/13]port link-type hybrid 
+[S1-GigabitEthernet0/0/13]port hybrid pvid vlan 3 
+[S1-GigabitEthernet0/0/13]port hybrid untagged vlan 3 to 4
+```
+
+定义 S2 的 G0/0/3 接口为 Hybird 接口，属于 VLAN4。对 VLAN3 和 VLAN4 定义为 Untagged。
+
+```
+[S2]interface GigabitEthernet0/0/3 
+[S2-GigabitEthernet0/0/3]undo port default vlan 
+[S2-GigabitEthernet0/0/3]port link-type hybrid 
+[S2-GigabitEthernet0/0/3]port hybrid pvid vlan 4 
+[S2-GigabitEthernet0/0/3]port hybrid untagged vlan 3 to 4 
+```
+
+此时 S3 与 R3 虽然在不同网段，但是可以实现互通
+
+```
+[S3]ping 10.0.6.4
+```
+
+
 
 
 # 附录

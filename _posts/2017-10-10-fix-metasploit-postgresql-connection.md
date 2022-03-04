@@ -3,7 +3,7 @@ layout: post
 title: Metasploit 没有自动连接 postgresql 数据库的解决方法
 date: 2017-10-10 09:48
 category: 网络安全
-author: tags: [metasploit, postgresql, kali, backtrack5]
+tags: [metasploit, postgresql, kali, backtrack5]
 ---
 
 启动 metasploit 后，发现没有自动连接 postgresql 数据库

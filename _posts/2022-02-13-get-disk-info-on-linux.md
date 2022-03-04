@@ -24,7 +24,7 @@ yum install smartmontools
 
 |---|---|
 |查看全部硬盘|```smartctl --scan```|
-|查看硬盘的标识信息|```sudo smartctl --info /dev/sdx``|
+|查看硬盘的标识信息|```sudo smartctl --info /dev/sdx```|
 |查看硬盘的 SMART 信息|```sudo smartctl -a /dev/sdx```|
 
 

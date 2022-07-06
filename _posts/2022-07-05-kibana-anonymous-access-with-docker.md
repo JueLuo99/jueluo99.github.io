@@ -97,10 +97,10 @@ xpack.security.authc.providers:
 
 
 ### 参考连接
-1. [Authentication in Kibana | Kibana Guide [8.3] | Elastic](https://www.elastic.co/guide/en/kibana/current/kibana-authentication.html#anonymous-authentication)
-1. [Embed Kibana content in a web page | Kibana Guide [8.3] | Elastic](https://www.elastic.co/guide/en/kibana/current/embedding.html)
+1. [Authentication in Kibana - Kibana Guide [8.3] - Elastic](https://www.elastic.co/guide/en/kibana/current/kibana-authentication.html#anonymous-authentication)
+1. [Embed Kibana content in a web page - Kibana Guide [8.3] - Elastic](https://www.elastic.co/guide/en/kibana/current/embedding.html)
 1. [Share Public URL Option Not Present - Elastic Stack / Kibana - Discuss the Elastic Stack](https://discuss.elastic.co/t/share-public-url-option-not-present/266843)
-1. [Configure Kibana | Kibana Guide [8.3] | Elastic](https://www.elastic.co/guide/en/kibana/current/settings.html)
-1. [Install Kibana with Docker | Kibana Guide [8.3] | Elastic](https://www.elastic.co/guide/en/kibana/current/docker.html#docker-bind-mount-config)
+1. [Configure Kibana - Kibana Guide [8.3] - Elastic](https://www.elastic.co/guide/en/kibana/current/settings.html)
+1. [Install Kibana with Docker - Kibana Guide [8.3] - Elastic](https://www.elastic.co/guide/en/kibana/current/docker.html#docker-bind-mount-config)
 1. [Kibana：如何让用户匿名访问 Kibana 中的 Dashboard_Elastic 中国社区官方博客的博客-CSDN博客_kibana 匿名登录](https://blog.csdn.net/UbuntuTouch/article/details/118152293)
-1. [Security settings in Kibana | Kibana Guide [8.3] | Elastic](https://www.elastic.co/guide/en/kibana/current/security-settings-kb.html#xpack-security-sameSiteCookies)
+1. [Security settings in Kibana - Kibana Guide [8.3] - Elastic](https://www.elastic.co/guide/en/kibana/current/security-settings-kb.html#xpack-security-sameSiteCookies)

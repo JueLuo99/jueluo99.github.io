@@ -27,8 +27,9 @@ sudo apt install docker.io docker-compose
 ```
 在其他平台上，可参考 Docker 的官方文档：
 
-- [Get Docker | Docker Documentation](https://docs.docker.com/get-docker/)
-- [Install Docker Compose | Docker Documentation](https://docs.docker.com/compose/install/)
+[Get Docker - Docker Documentation](https://docs.docker.com/get-docker/)
+
+[Install Docker Compose - Docker Documentation](https://docs.docker.com/compose/install/)
 
 
 ## 四、配置并启动 Elastic Stack
@@ -111,7 +112,7 @@ sudo sysctl -w vm.max_map_count=262144
 
 ## 七、参考资料
 
-1. [Running the Elastic Stack ("ELK") on Docker | Getting Started [8.1] | Elastic](https://www.elastic.co/guide/en/elastic-stack-get-started/current/get-started-stack-docker.html#_prerequisites_2)
+1. [Running the Elastic Stack ("ELK") on Docker - Getting Started [8.1] - Elastic](https://www.elastic.co/guide/en/elastic-stack-get-started/current/get-started-stack-docker.html#_prerequisites_2)
 1. [elasticsearch/docs/reference/setup/install/docker at 8.1 · elastic/elasticsearch](https://github.com/elastic/elasticsearch/tree/8.1/docs/reference/setup/install/docker/)
 1. [Docker - Kibana, APM, Elasticsearch issue - - Stack Overflow](https://stackoverflow.com/questions/59226203/docker-kibana-apm-elasticsearch-issue)
-1. [Maximum map count check | Elasticsearch Guide [8.1] | Elastic](https://www.elastic.co/guide/en/elasticsearch/reference/current/_maximum_map_count_check.html)
+1. [Maximum map count check - Elasticsearch Guide [8.1] - Elastic](https://www.elastic.co/guide/en/elasticsearch/reference/current/_maximum_map_count_check.html)

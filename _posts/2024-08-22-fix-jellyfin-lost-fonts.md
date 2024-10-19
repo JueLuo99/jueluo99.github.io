@@ -15,7 +15,7 @@ tags: [docker, docker-compose, jellyfin, linux]
 进入容器后，执行以下命令（使用上海交通大学的镜像源）：
 
 ```bash
-sed -i "s|http://deb.debian.org/debian|http://mirror.sjtu.edu.cn/debian|g" /etc/apt/sources.list.d/debian.sources && apt install -y fonts-noto-cjk-extra
+sed -i "s|http://deb.debian.org/debian|http://mirror.sjtu.edu.cn/debian|g" /etc/apt/sources.list.d/debian.sources && apt update && apt install -y fonts-noto-cjk-extra
 ```
 
 安装完毕后，**重启该容器**即可
